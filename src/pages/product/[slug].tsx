@@ -3,14 +3,20 @@ import { useRouter } from "next/router";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
+// Import Swiper styles
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper";
 // import Category from "../../components/category/category";
 import Link from "next/link";
 import Skelton from "./datailsSkeleton/datails";
+import Image from "next/image";
+import { Button } from "../../components/button/button";
+import ReactIcon from "../../components/ReactIcon/ReactIcon";
 
 function ProductScreen() {
-  const [people, setData] = useState([]);
+  const [people, setData] = useState<any>([]);
   const getData = () => fetch("/api/product").then((res) => res.json());
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -25,12 +31,12 @@ function ProductScreen() {
   if (!person) {
     return <Skelton />;
   }
-
+  const data = [1, 2, 3, 4, 5];
   return (
     <>
       {/* <Category /> */}
       <div className="w-full h-auto w-5/6 m-auto rounded-md">
-        <div className="flex-1 relative z-0 flex overflow-hidden my-10">
+        <div className="flex-1 relative z-0 lg:flex overflow-hidden my-10 sm:block">
           <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none mr-3">
             <div className="md:h-[450px] border border-10 border-black w-full bg-black">
               <Swiper
@@ -45,11 +51,19 @@ function ProductScreen() {
                 modules={[Pagination, Navigation, Autoplay]}
                 className="flex text-center p-10"
               >
-                <SwiperSlide>
-                  <div className="bg-gray-100 h-[440px] w-5/6 m-auto mt-1 select-none">
-                    {/* <Image src={person.productApiUrl} alt="products images" /> */}
-                  </div>
-                </SwiperSlide>
+                {data.map((items) => {
+                  return (
+                    <SwiperSlide key={items}>
+                      <div className="bg-gray-100 h-[440px] w-5/6 m-auto mt-1 select-none">
+                        <img
+                          src={person.productApiUrl}
+                          className={"w-full h-[440px]"}
+                          alt="products images"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
           </main>
@@ -167,6 +181,15 @@ function ProductScreen() {
                     }}
                   ></div>
                 </div>
+              </div>
+              <div className="p-3 border border-1 border-gray-300">
+                <Button
+                  xl
+                  full
+                  className="px-20 bg-[#0047FF] text-white rounded-none m-auto"
+                >
+                  See Location
+                </Button>
               </div>
             </div>
           </aside>
