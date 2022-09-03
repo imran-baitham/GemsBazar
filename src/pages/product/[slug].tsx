@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import { Autoplay } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 // import Category from "../../components/category/category";
 import Link from "next/link";
 import Skelton from "./datailsSkeleton/datails";
@@ -32,37 +32,26 @@ function ProductScreen() {
       <div className="w-full h-auto w-5/6 m-auto rounded-md">
         <div className="flex-1 relative z-0 flex overflow-hidden my-10">
           <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none mr-3">
-            <Swiper
-              loop={true}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-              className=""
-            >
-              <SwiperSlide>
-                <img
-                  className="h-[500px] bg-gray-200 w-full"
-                  src={person.productApiUrl}
-                  alt=""
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  className="h-[500px] bg-gray-200 w-full"
-                  src={person.productApiUrl}
-                  alt=""
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  className="h-[500px] bg-gray-200 w-full"
-                  src={person.productApiUrl}
-                  alt=""
-                />
-              </SwiperSlide>
-            </Swiper>
+            <div className="md:h-[450px] border border-10 border-black w-full bg-black">
+              <Swiper
+                pagination={{
+                  type: "fraction",
+                }}
+                autoplay={{
+                  delay: 9000,
+                  disableOnInteraction: false,
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation, Autoplay]}
+                className="flex text-center p-10"
+              >
+                <SwiperSlide>
+                  <div className="bg-gray-100 h-[440px] w-5/6 m-auto mt-1 select-none">
+                    {/* <Image src={person.productApiUrl} alt="products images" /> */}
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
           </main>
           <aside className="relative xl:flex xl:flex-col flex-shrink-0 w-96 overflow-y-auto">
             <div className="border border-1 p-5 h-full">

@@ -1,6 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Header, ReactIcon } from "../components";
+import Category from "../components/category/category";
+import Footer from "../components/footer/footer";
+import Dreams from "../components/home";
 import Slider from "../components/slider/slider";
 import Product from "./product/product";
 
@@ -15,17 +18,14 @@ const Home: NextPage = () => {
 
       <main className="w-full">
         <Header />
-        <ReactIcon icon="BsBell" className="w-12 h-12" />
+        <Dreams />
+        <Category />
         <Product />
         <Slider />
       </main>
 
-      <footer className="bg-red-300">
-        <div className="container max-w-4xl mx-auto py-16 text-center break-normal">
-          <p className="text-black font-extrabold text-3xl md:text-5xl">
-            Trippers.Pk
-          </p>
-        </div>
+      <footer>
+        <Footer />
       </footer>
     </div>
   );

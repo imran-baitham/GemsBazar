@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import rateImage from "../../Images/star.png";
 import { ViewProjectPreloader } from "./productSkeleton/Skeleton";
 import { Badge } from "@mantine/core";
-import check from "../../Images/nagar.jpg";
-import Image from "next/image";
 import { Button } from "../../components/button/button";
 
 export default function Product() {
@@ -45,11 +43,9 @@ export default function Product() {
           >
             <Link href={`/product/${person.slug}`} passHref>
               <div className="flex-1 flex flex-col bg-gray-200 cursor-pointer">
-                <Image
-                  width={300}
-                  height={240}
-                  className="flex-shrink-0 mx-auto h-64 w-96 bg-gray-200"
-                  src={check.src}
+                <img
+                  className="flex-shrink-0 mx-auto h-[250px] w-96 bg-gray-200"
+                  src={person.productApiUrl}
                   alt="image not get from api"
                 />
               </div>
