@@ -8,6 +8,7 @@ import Slider from "../components/slider/slider";
 import Product from "./product/product";
 
 const Home: NextPage = () => {
+  
   return (
     <div>
       <Head>
