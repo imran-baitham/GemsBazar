@@ -31,7 +31,7 @@ const Tour = [
   { name: "Apartments", href: "#" },
 ];
 
-function Category(props) {
+function Category() {
   const [show, setShow] = useState(false);
   return (
     <div className="w-full h-auto w-5/6 m-auto text-white">
