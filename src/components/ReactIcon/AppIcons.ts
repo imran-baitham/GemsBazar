@@ -60,5 +60,6 @@ export { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown';
 export { HiLocationMarker } from '@react-icons/all-files/hi/HiLocationMarker';
 export { FaPen } from '@react-icons/all-files/fa/FaPen';
 export { FaUpload } from '@react-icons/all-files/fa/FaUpload';
+export { FaRegUser } from '@react-icons/all-files/fa/FaRegUser';
 
 

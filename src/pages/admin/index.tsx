@@ -5,6 +5,9 @@ import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid";
 import ReactIcon from "../../components/ReactIcon/ReactIcon";
 import MyProfile from "../myprofile";
 import MyUploads from "../myuploads";
+import { Button } from "../../components/button/button";
+import ManageProducts from "./manageproducts";
+import ManageUsers from "./manageusers/Index";
 
 const pages = [
   { name: "Projects", href: "#", current: false },
@@ -57,27 +60,51 @@ function Index() {
       >
         <Tabs.List className="w-64 text-2xl">
           <Tabs.Tab
-            value="MyProfile"
+            value="users"
             icon={<ReactIcon icon="FaPen" />}
             className={"hover:bg-gray-200 p-5"}
           >
-            Edit Profile
+            Manage users
           </Tabs.Tab>
           <Tabs.Tab
-            value="MyUploads"
+            value="products"
             icon={<ReactIcon icon="FaUpload" />}
             className={"hover:bg-gray-200 p-5"}
           >
-            My Uploads
+            Manage products
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="account"
+            icon={<ReactIcon icon="FaRegUser" />}
+            className={"hover:bg-gray-200 p-5"}
+          >
+            My account
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="logout"
+            icon={<ReactIcon icon="FaArrowLeft" />}
+            className={"hover:bg-gray-200 p-5"}
+          >
+            Logout
           </Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="MyProfile" pl="xs">
-          <MyProfile />
+        <Tabs.Panel value="users" pl="xs">
+          <ManageUsers />
         </Tabs.Panel>
 
-        <Tabs.Panel value="MyUploads" pl="xs">
-          <MyUploads />
+        <Tabs.Panel value="products" pl="xs">
+          <ManageProducts />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="account" pl="xs">
+          myaccount
+        </Tabs.Panel>
+
+        <Tabs.Panel value="logout" pl="xs">
+          <div className="p-10">
+            <Button>Logout</Button>
+          </div>
         </Tabs.Panel>
       </Tabs>
     </div>
