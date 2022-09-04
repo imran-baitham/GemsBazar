@@ -33,7 +33,7 @@ export default function Product() {
         </ul>
       </div>
     )
-
+console.log(products)
   return (
     <div className="w-full h-auto w-5/6 m-auto rounded-md">
       <h1 className="font-black text-black text-4xl leading-[55px] text-left pt-14 pb-9">
@@ -48,17 +48,17 @@ export default function Product() {
             key={person.id}
             className="col-span-1 bg-[#F8F8F8] flex flex-col text-center rounded-lg shadow divide-y divide-gray-200 hover:shadow-xl border border-1"
           >
-            <Link href={`/product/${person.slug}`} passHref>
+            <Link href={`/product/${person.id}`} passHref>
               <div className="flex-1 flex flex-col bg-gray-200 cursor-pointer">
                 <img
                   className="flex-shrink-0 mx-auto h-[250px] w-96 bg-gray-200"
-                  src={person.imageUrls[1]}
+                  src={person.imageUrls[0]}
                   alt="image not get from api"
                 />
               </div>
             </Link>
             <div className="text-left p-4">
-              <Link href={`/product/${person.slug}`} passHref>
+              <Link href={`/product/${person.id}`} passHref>
                 <h3 className="text-2xl font-[300] font-semibold hover:underline cursor-pointer">
                   {person.name}
                 </h3>
