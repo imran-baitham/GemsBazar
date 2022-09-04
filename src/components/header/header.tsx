@@ -16,13 +16,13 @@ export function Header(props: HeaderProps) {
   const [login, setTodos] = useState<boolean>();
 
   useEffect(() => {
-    setUserLogin(localStorage.getItem("user"));
+    setUserLogin(localStorage.getItem("token"));
     if (userLogin) {
       setTodos(true);
     } else setTodos(false);
   }, [userLogin]);
   const handleOut = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setTodos(false)
   };
   return (

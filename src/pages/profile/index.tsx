@@ -1,5 +1,4 @@
 import { Tabs } from "@mantine/core";
-import { IconPhoto, IconMessageCircle, IconSettings } from "@tabler/icons";
 import Header from "../../components/header/header";
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid";

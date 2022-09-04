@@ -21,6 +21,7 @@
     "@mantine/next": "^5.2.4",
     "@react-icons/all-files": "^4.1.0",
     "core-js": "^3.25.0",
+    "firebase": "^9.9.4",
     "hygen": "^6.2.8",
     "next": "12.2.5",
     "prettier": "^2.7.1",
