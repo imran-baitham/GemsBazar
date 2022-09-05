@@ -1,27 +1,27 @@
 // import Image from "next/image";
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import rateImage from '../../Images/star.png'
-import { ViewProjectPreloader } from './productSkeleton/Skeleton'
-import { Badge } from '@mantine/core'
-import { Button } from '../../components/button/button'
-import { collection, getDocs } from 'firebase/firestore'
-import { app, database } from '../../../firebaseConfig'
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import rateImage from "../../Images/star.png";
+import { ViewProjectPreloader } from "./productSkeleton/Skeleton";
+import { Badge } from "@mantine/core";
+import { Button } from "../../components/button/button";
+import { collection, getDocs } from "firebase/firestore";
+import { app, database } from "../../../firebaseConfig";
 
 export default function Product() {
-  const [products, setProducts] = useState([])
-  const databaseRef = collection(database, 'NewProduct')
+  const [products, setProducts] = useState([]);
+  const databaseRef = collection(database, "NewProduct");
 
   useEffect(() => {
     getDocs(databaseRef)
       .then((Response) => {
         const data = Response.docs.map((data) => {
-          return { ...data.data(), id: data.id }
-        })
-        setProducts(data as any)
+          return { ...data.data(), id: data.id };
+        });
+        setProducts(data as any);
       })
-      .catch(() => alert('error while fetching'))
-  }, [])
+      .catch(() => alert("error while fetching"));
+  }, []);
   if (products.length <= 0)
     return (
       <div className="w-full h-auto w-5/6 m-auto rounded-md">
@@ -32,8 +32,8 @@ export default function Product() {
           <ViewProjectPreloader />
         </ul>
       </div>
-    )
-console.log(products)
+    );
+  console.log(products);
   return (
     <div className="w-full h-auto w-5/6 m-auto rounded-md">
       <h1 className="font-black text-black text-4xl leading-[55px] text-left pt-14 pb-9">
@@ -82,7 +82,7 @@ console.log(products)
                   <h2 className="ml-2">{person.rate}</h2>
                 </div>
                 <Badge size="lg" radius="xs" variant="outline">
-                  {person.status === 'available' ? 'Available' : 'Booked'}
+                  {person.status === "available" ? "Available" : "Booked"}
                 </Badge>
               </div>
             </div>
@@ -96,5 +96,5 @@ console.log(products)
         Load More
       </Button>
     </div>
-  )
+  );
 }

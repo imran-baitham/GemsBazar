@@ -10,17 +10,15 @@ import { Loader } from "@mantine/core";
 
 // export default Skelton;
 
-
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useState } from "react";
 
 export default function Skelton() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(true);
 
   return (
     <div className="text-center flex justify-center h-screen align-center items-center">
       <Loader size="xl" />
     </div>
-
-  )
+  );
 }

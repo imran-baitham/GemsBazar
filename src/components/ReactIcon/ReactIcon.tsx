@@ -1,7 +1,7 @@
-import { IconType } from '@react-icons/all-files';
-import React from 'react';
-import * as AppIcons from './AppIcons';
-export * from './AppIcons';
+import { IconType } from "@react-icons/all-files";
+import React from "react";
+import * as AppIcons from "./AppIcons";
+export * from "./AppIcons";
 
 export type TAppIcons = keyof typeof AppIcons;
 
@@ -25,7 +25,7 @@ export const ReactIcon = ({
 }: ReactIconLoaderProps): JSX.Element | null => {
   type IconTypeKey = keyof typeof AppIcons;
   type AppIconType = Record<IconTypeKey, IconType>;
-  const Icon = (AppIcons as AppIconType)[icon || 'FaRobot'];
+  const Icon = (AppIcons as AppIconType)[icon || "FaRobot"];
 
   return Icon ? <Icon {...props} /> : null;
 };

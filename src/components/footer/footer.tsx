@@ -96,7 +96,7 @@ function Footer() {
               <p>Facebook</p>
             </div>
             <div className="flex items-center pt-2">
-              <ImLinkedin className="h-8 w-8 mr-2"/>
+              <ImLinkedin className="h-8 w-8 mr-2" />
               <p>Linkedin</p>
             </div>
           </div>

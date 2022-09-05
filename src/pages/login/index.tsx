@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import img from '../../Images/logo.png'
-import { useRouter } from 'next/router'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import Link from 'next/link'
-import ReactIcon from '../../components/ReactIcon/ReactIcon'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { app } from '../../../firebaseConfig'
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import img from "../../Images/logo.png";
+import { useRouter } from "next/router";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
+import ReactIcon from "../../components/ReactIcon/ReactIcon";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../../../firebaseConfig";
 
 interface FormData {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 const Index = () => {
-
-  let router = useRouter()
+  let router = useRouter();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormData>()
+  } = useForm<FormData>();
   // ===============  Fetch user  ==================
- 
-  const auth = getAuth(app)
+
+  const auth = getAuth(app);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data)
+    console.log(data);
     // let check = user.filter((user: any) => {
     //   return user.email === data.email && user.password === data.password;
     // })[0];
@@ -41,15 +40,14 @@ const Index = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
-        router.push('/')
-        console.log(userCredential.user.uid,"user credentials")
-        localStorage.setItem("token", JSON.stringify(userCredential.user.uid))
+        router.push("/");
+        console.log(userCredential.user.uid, "user credentials");
+        localStorage.setItem("token", JSON.stringify(userCredential.user.uid));
       })
       .catch((error) => {
-       alert(error.code)
-      })
-  }
-
+        alert(error.code);
+      });
+  };
 
   return (
     <div>
@@ -76,7 +74,7 @@ const Index = () => {
                       Email
                     </label>
                     <input
-                      {...register('email', {
+                      {...register("email", {
                         required: true,
                         minLength: 3,
                         maxLength: 35,
@@ -87,7 +85,7 @@ const Index = () => {
                       placeholder="name@gmail.com"
                     />
                     <div className="block mb-2 text-[13px] text-red-900 pt-1">
-                      {errors?.email?.type === 'required' && (
+                      {errors?.email?.type === "required" && (
                         <div className="flex items-center">
                           <ReactIcon
                             icon="MdErrorOutline"
@@ -96,13 +94,13 @@ const Index = () => {
                           <p>Email is required</p>
                         </div>
                       )}
-                      {errors?.email?.type === 'pattern' && (
+                      {errors?.email?.type === "pattern" && (
                         <p>Couldn’t find your Google Account</p>
                       )}
-                      {errors?.email?.type === 'minLength' && (
+                      {errors?.email?.type === "minLength" && (
                         <p>Email more than 6 characters</p>
                       )}
-                      {errors?.email?.type === 'maxLength' && (
+                      {errors?.email?.type === "maxLength" && (
                         <p>Email less than 15 characters</p>
                       )}
                     </div>
@@ -115,7 +113,7 @@ const Index = () => {
                       Password
                     </label>
                     <input
-                      {...register('password', {
+                      {...register("password", {
                         required: true,
                         minLength: 6,
                         maxLength: 15,
@@ -126,7 +124,7 @@ const Index = () => {
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm  focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
                     <div className="block mb-2 text-[13px] text-red-900 pt-1">
-                      {errors?.password?.type === 'required' && (
+                      {errors?.password?.type === "required" && (
                         <div className="flex items-center">
                           <ReactIcon
                             icon="MdErrorOutline"
@@ -135,10 +133,10 @@ const Index = () => {
                           <p>Password is required</p>
                         </div>
                       )}
-                      {errors?.password?.type === 'minLength' && (
+                      {errors?.password?.type === "minLength" && (
                         <p>Password more than 6 characters</p>
                       )}
-                      {errors?.password?.type === 'maxLength' && (
+                      {errors?.password?.type === "maxLength" && (
                         <p>Password less than 15 characters</p>
                       )}
                     </div>
@@ -173,7 +171,7 @@ const Index = () => {
                   <p className="text-sm font-light flex justify-center text-gray-500 dark:text-gray-400">
                     Don’t have an account?
                     <div className="font-bold text-1xl text-[#0047FF] ml-2">
-                      <Link href={'/signup'}>Sign Up</Link>
+                      <Link href={"/signup"}>Sign Up</Link>
                     </div>
                   </p>
                 </div>
@@ -183,7 +181,7 @@ const Index = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

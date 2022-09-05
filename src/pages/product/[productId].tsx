@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Autoplay, Navigation, Pagination } from 'swiper'
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, Navigation, Pagination } from "swiper";
 // import Category from "../../components/category/category";
-import Link from 'next/link'
-import Skelton from './datailsSkeleton/datails'
-import Image from 'next/image'
-import { Button } from '../../components/button/button'
-import ReactIcon from '../../components/ReactIcon/ReactIcon'
-import { collection, doc, getDoc } from 'firebase/firestore'
-import { database } from '../../../firebaseConfig'
-import Header from '../../components/header/header'
+import Link from "next/link";
+import Skelton from "./datailsSkeleton/datails";
+import Image from "next/image";
+import { Button } from "../../components/button/button";
+import ReactIcon from "../../components/ReactIcon/ReactIcon";
+import { collection, doc, getDoc } from "firebase/firestore";
+import { database } from "../../../firebaseConfig";
+import Header from "../../components/header/header";
 function ProductScreen() {
-  const [product, setProduct] = useState<any>([])
-  const [prdtId, setPrdtId] = useState('')
-  const router = useRouter()
+  const [product, setProduct] = useState<any>([]);
+  const [prdtId, setPrdtId] = useState("");
+  const router = useRouter();
   // eslint-disable-next-line
   useEffect(() => {
-    const { productId } = router.query
+    const { productId } = router.query;
     if (productId) {
-      setPrdtId(productId as string)
+      setPrdtId(productId as string);
     }
-    const databaseRef = doc(database, 'NewProduct', productId)
+    const databaseRef = doc(database, "NewProduct", productId);
     getDoc(databaseRef)
       .then((item) => console.log(setProduct(item.data())))
-      .catch((err) => console.log(err, 'error'))
-  }, [])
+      .catch((err) => console.log(err, "error"));
+  }, []);
   if (product.length === 0) {
-    return <Skelton />
+    return <Skelton />;
   }
-  const data = [1, 2, 3, 4, 5] as any
-  console.log(product)
+  const data = [1, 2, 3, 4, 5] as any;
+  console.log(product);
   return (
     <>
       <Header />
@@ -46,7 +46,7 @@ function ProductScreen() {
             <div className="md:h-[450px] border border-10 border-black w-full bg-black">
               <Swiper
                 pagination={{
-                  type: 'fraction',
+                  type: "fraction",
                 }}
                 autoplay={{
                   delay: 9000,
@@ -62,12 +62,12 @@ function ProductScreen() {
                       <div className="bg-gray-100 h-[440px] w-5/6 m-auto mt-1 select-none">
                         <img
                           src={url}
-                          className={'w-full h-[440px]'}
+                          className={"w-full h-[440px]"}
                           alt="products images"
                         />
                       </div>
                     </SwiperSlide>
-                  )
+                  );
                 })}
               </Swiper>
             </div>
@@ -106,7 +106,7 @@ function ProductScreen() {
                 </div>
               </div>
               <div className="my-5 text-center">
-                <Link href={'/chatbox'}>
+                <Link href={"/chatbox"}>
                   <button className="bg-[#0047FF] absolute bottom-2 left-2 text-white border-1 py-3 px-32 mt-10">
                     Chat with saller
                   </button>
@@ -169,7 +169,7 @@ function ProductScreen() {
                     <span className="absolute inset-0" aria-hidden="true" />
                     <p className="text-sm font-medium text-gray-900">Stutas</p>
                     <p className="text-sm text-gray-500 truncate">
-                       {product?.productDetails?.status}
+                      {product?.productDetails?.status}
                     </p>
                   </div>
                 </div>
@@ -188,9 +188,9 @@ function ProductScreen() {
               </div>
             </div>
             <input
-              type={'text'}
+              type={"text"}
               placeholder="Write your review"
-              className={'mt-14 w-full border border-gray-300 p-4 outline-none'}
+              className={"mt-14 w-full border border-gray-300 p-4 outline-none"}
             />
           </main>
           <aside className="relative xl:flex xl:flex-col flex-shrink-0 w-96 overflow-y-auto">
@@ -218,7 +218,7 @@ function ProductScreen() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default ProductScreen
+export default ProductScreen;

@@ -1,47 +1,47 @@
-import React, { useState } from 'react'
-import img from '../../Images/logo.png'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import Link from 'next/link'
-import { app } from '../../../firebaseConfig'
+import React, { useState } from "react";
+import img from "../../Images/logo.png";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
+import { app } from "../../../firebaseConfig";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
-} from 'firebase/auth'
+  signInWithPopup,
+} from "firebase/auth";
 interface FormData {
-  username: string
-  email: string
-  password: string
+  username: string;
+  email: string;
+  password: string;
 }
 
 function Index() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  let router = useRouter()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let router = useRouter();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormData>()
+  } = useForm<FormData>();
 
-  const auth = getAuth(app)
-  const googleProvider= new GoogleAuthProvider()
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
   const onSubmit: SubmitHandler<FormData> = async () => {
     createUserWithEmailAndPassword(auth, email, password).then((res) => {
-      router.push('/login')
-      console.log(res, 'response')
-    })
-  }
+      router.push("/login");
+      console.log(res, "response");
+    });
+  };
 
-  const SignUpWithGoogle=()=>{
-signInWithPopup(auth, googleProvider).then((response)=>{
-  console.log(response,"Respone")
-})
-  }
+  const SignUpWithGoogle = () => {
+    signInWithPopup(auth, googleProvider).then((response) => {
+      console.log(response, "Respone");
+    });
+  };
   return (
     <div>
       <div className="bg-gray-50 dark:bg-gray-900">
@@ -88,7 +88,7 @@ signInWithPopup(auth, googleProvider).then((response)=>{
                     Email or Number
                   </label>
                   <input
-                    {...register('email', {
+                    {...register("email", {
                       required: true,
                       minLength: 3,
                       maxLength: 35,
@@ -101,16 +101,16 @@ signInWithPopup(auth, googleProvider).then((response)=>{
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm  focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   <div className="block mb-2 text-[13px] text-red-900 pt-1">
-                    {errors?.email?.type === 'required' && (
+                    {errors?.email?.type === "required" && (
                       <p>Email is required</p>
                     )}
-                    {errors?.email?.type === 'pattern' && (
+                    {errors?.email?.type === "pattern" && (
                       <p>Couldn’t find your Google Account</p>
                     )}
-                    {errors?.email?.type === 'minLength' && (
+                    {errors?.email?.type === "minLength" && (
                       <p>Email more than 6 characters</p>
                     )}
-                    {errors?.email?.type === 'maxLength' && (
+                    {errors?.email?.type === "maxLength" && (
                       <p>Email less than 15 characters</p>
                     )}
                   </div>
@@ -120,7 +120,7 @@ signInWithPopup(auth, googleProvider).then((response)=>{
                     Password
                   </label>
                   <input
-                    {...register('password', {
+                    {...register("password", {
                       required: true,
                       minLength: 6,
                       maxLength: 15,
@@ -133,13 +133,13 @@ signInWithPopup(auth, googleProvider).then((response)=>{
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm  focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   <div className="block mb-2 text-[13px] text-red-900 pt-1">
-                    {errors?.password?.type === 'required' && (
+                    {errors?.password?.type === "required" && (
                       <p>Password is required</p>
                     )}
-                    {errors?.password?.type === 'minLength' && (
+                    {errors?.password?.type === "minLength" && (
                       <p>Password more than 6 characters</p>
                     )}
-                    {errors?.password?.type === 'maxLength' && (
+                    {errors?.password?.type === "maxLength" && (
                       <p>Password less than 15 characters</p>
                     )}
                   </div>
@@ -156,18 +156,19 @@ signInWithPopup(auth, googleProvider).then((response)=>{
                 <p className="text-sm font-light flex justify-center  text-gray-500 dark:text-gray-400">
                   Already have an account?
                   <div className="font-bold text-1xl text-[#0047FF] ml-2">
-                    <Link href={'/login'}>Log In</Link>
+                    <Link href={"/login"}>Log In</Link>
                   </div>
                 </p>
               </form>
-              <button onClick={()=> SignUpWithGoogle()}>signUp with Google</button>
-
+              <button onClick={() => SignUpWithGoogle()}>
+                signUp with Google
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;

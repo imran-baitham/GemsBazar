@@ -16,7 +16,10 @@ const Dreams = () => {
             Bring your dreams <br /> to life with locals
           </h1>
           <div className="leading-[100px]">
-            <Button xl className="text-white ml-[8%] text-lg font-bold bg-[#0047FF] py-3 px-7 rounded-sm mt-10">
+            <Button
+              xl
+              className="text-white ml-[8%] text-lg font-bold bg-[#0047FF] py-3 px-7 rounded-sm mt-10"
+            >
               SELL IT
             </Button>
           </div>

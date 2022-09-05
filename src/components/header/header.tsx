@@ -23,14 +23,20 @@ export function Header(props: HeaderProps) {
   }, [userLogin]);
   const handleOut = () => {
     localStorage.removeItem("token");
-    setTodos(false)
+    setTodos(false);
   };
   return (
     <nav className="" aria-label="Top">
       <div className="w-full h-auto w-5/6 m-auto rounded-md">
         <div className="w-full flex items-center justify-between h-2/3">
           <Link href="/">
-            <Image src={logo} height={80} width={130} className={"cursor-pointer"} alt="image"/>
+            <Image
+              src={logo}
+              height={80}
+              width={130}
+              className={"cursor-pointer"}
+              alt="image"
+            />
           </Link>
           <div className="w-full flex items-center justify-end">
             {/* first input */}
@@ -140,7 +146,7 @@ export function Header(props: HeaderProps) {
           </div>
           {login ? (
             <Link href={"/addproduct"}>
-            <Button className="w-32">Add Product</Button>
+              <Button className="w-32">Add Product</Button>
             </Link>
           ) : (
             <div className="flex">

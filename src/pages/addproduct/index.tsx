@@ -1,105 +1,105 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState } from 'react'
-import Category from '../../components/category/category'
-import Header from '../../components/header/header'
-import { app, database, storage } from '../../../firebaseConfig'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { collection, addDoc } from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage'
-import { async } from '@firebase/util'
+import React, { useEffect, useState } from "react";
+import Category from "../../components/category/category";
+import Header from "../../components/header/header";
+import { app, database, storage } from "../../../firebaseConfig";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { async } from "@firebase/util";
 interface FormData {
-  productTitle: string
-  discription: string
-  category: string
-  location: string
-  price: number
-  status: string
-  phoneNumber: string
-  images: Array<any>
-  userId: string
+  productTitle: string;
+  discription: string;
+  category: string;
+  location: string;
+  price: number;
+  status: string;
+  phoneNumber: string;
+  images: Array<any>;
+  userId: string;
 }
 
 function From() {
-  const UserId = localStorage.getItem('token')
-  console.log(UserId, 'json id')
+  const UserId = localStorage.getItem("token");
+  console.log(UserId, "json id");
   const initialDetails = {
-    productTitle: '',
-    discription: '',
-    category: 'Gemstones',
-    location: '',
+    productTitle: "",
+    discription: "",
+    category: "Gemstones",
+    location: "",
     price: 0,
-    status: 'Avaliable',
+    status: "Avaliable",
     phoneNumber: 0,
     images: [],
     userId: UserId,
-  }
+  };
 
-  const [productDetails, setProductDetails] = useState(initialDetails)
-  const [images, setImages] = useState(Array<any>)
-  const [imageUrls, setImageUrls]= useState(Array<string>)
+  const [productDetails, setProductDetails] = useState(initialDetails);
+  const [images, setImages] = useState(Array<any>);
+  const [imageUrls, setImageUrls] = useState(Array<string>);
   const handleChange = (e: any) => {
     setProductDetails({
       ...productDetails,
       [e.target.name]: e.target.value,
-    })
-    console.log(productDetails)
-  }
+    });
+    console.log(productDetails);
+  };
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormData>()
-  const databaseRef = collection(database, 'NewProduct')
+  } = useForm<FormData>();
+  const databaseRef = collection(database, "NewProduct");
   const onSubmit: SubmitHandler<FormData> = async () => {
-    console.log('submit clicked')
+    console.log("submit clicked");
     addDoc(databaseRef, { productDetails })
-      .then((Response) => console.log(Response, 'success'))
-      .catch((err) => console.log(err, 'errr'))
-  }
+      .then((Response) => console.log(Response, "success"))
+      .catch((err) => console.log(err, "errr"));
+  };
 
   // ==========================================
   // = function for post products with images =
   // ==========================================
-const HandleSubmitProduct= async () =>{
+  const HandleSubmitProduct = async () => {
+    await images.forEach((i) => {
+      const imageRef = ref(storage, `images/${i?.name}`);
 
-await images.forEach((i)=>{
-  const imageRef = ref(storage, `images/${i?.name}`)
-
-  uploadBytes(imageRef, i)
-  .then((res) => {
-    const array = [res.ref]
-    array.forEach((item) => {
-      getDownloadURL(item)
-        .then((url) => {
-         setImageUrls((prev)=> [...prev, url])
-         console.log(url, "get url successfully")
+      uploadBytes(imageRef, i)
+        .then((res) => {
+          const array = [res.ref];
+          array.forEach((item) => {
+            getDownloadURL(item)
+              .then((url) => {
+                setImageUrls((prev) => [...prev, url]);
+                console.log(url, "get url successfully");
+              })
+              .catch(() => alert("faild to getting URL"));
+          });
         })
-        .catch(() => alert('faild to getting URL'))
-
-    })
-  })
-  .catch((Res) => console.log(Res, 'ERROR TO UPLOAD IMAGE', images))
-})
-}
+        .catch((Res) => console.log(Res, "ERROR TO UPLOAD IMAGE", images));
+    });
+  };
   const postProduct = async () => {
-    await  addDoc(databaseRef, { productDetails , imageUrls})
-  .then((res) => {
-   console.log(res,"added product sucessfully")
-  })
-  .catch((err) => console.log(err, 'errr'))
-  
-  }
-  if(images.length === imageUrls.length && images.length >=1 && productDetails.productTitle !== ""){
-   postProduct()
-   productDetails.productTitle=""
+    await addDoc(databaseRef, { productDetails, imageUrls })
+      .then((res) => {
+        console.log(res, "added product sucessfully");
+      })
+      .catch((err) => console.log(err, "errr"));
+  };
+  if (
+    images.length === imageUrls.length &&
+    images.length >= 1 &&
+    productDetails.productTitle !== ""
+  ) {
+    postProduct();
+    productDetails.productTitle = "";
   }
 
-  const imageTypes = ['image/jpg', 'image/png', 'image/PNG', 'image/jpeg']
+  const imageTypes = ["image/jpg", "image/png", "image/PNG", "image/jpeg"];
   const handleProductImage = (e: any) => {
-    for(let i=0; i< e.target.files.length; i++){
-      const selectedFile = e.target.files[i]
-      setImages((prev)=> [...prev,selectedFile])
-
+    for (let i = 0; i < e.target.files.length; i++) {
+      const selectedFile = e.target.files[i];
+      setImages((prev) => [...prev, selectedFile]);
     }
     // setImage(selectedFile)
 
@@ -112,7 +112,7 @@ await images.forEach((i)=>{
     // } else {
     //   alert('Please Select an Image')
     // }
-  }
+  };
 
   return (
     <>
@@ -134,7 +134,7 @@ await images.forEach((i)=>{
                     POST YOUR AD
                   </h3>
                   <p className="m-4  text-sm text-gray-600">
-                    Accomodations / Room{' '}
+                    Accomodations / Room{" "}
                     <a className="border-b-[2px]">Change</a>
                   </p>
                 </div>
@@ -151,7 +151,7 @@ await images.forEach((i)=>{
                         </label>
                         <input
                           className="mt-1 p-4 outline-none ring-black border-black-500  w-full border rounded-md"
-                          {...register('productTitle', {
+                          {...register("productTitle", {
                             required: true,
                             minLength: 3,
                             maxLength: 35,
@@ -171,7 +171,7 @@ await images.forEach((i)=>{
                         <h2 className="mb-2">Description</h2>
                         <textarea
                           rows={10}
-                          {...register('discription', {
+                          {...register("discription", {
                             required: true,
                             minLength: 3,
                             maxLength: 35,
@@ -192,7 +192,7 @@ await images.forEach((i)=>{
                         </label>
                         <select
                           id="country"
-                          {...register('category', {
+                          {...register("category", {
                             required: true,
                             minLength: 3,
                             maxLength: 35,
@@ -221,7 +221,7 @@ await images.forEach((i)=>{
                     </label>
                     <input
                       id="price"
-                      {...register('price', {
+                      {...register("price", {
                         required: true,
                         pattern: /@/i,
                       })}
@@ -254,7 +254,7 @@ await images.forEach((i)=>{
                           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">
                               Click to upload
-                            </span>{' '}
+                            </span>{" "}
                             or drag and drop
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -279,7 +279,7 @@ await images.forEach((i)=>{
                     <input
                       type="text"
                       id="location"
-                      {...register('location', {
+                      {...register("location", {
                         required: true,
                         pattern: /@/i,
                       })}
@@ -295,7 +295,7 @@ await images.forEach((i)=>{
                     </label>
                     <select
                       id="status"
-                      {...register('status', {
+                      {...register("status", {
                         required: true,
                         pattern: /@/i,
                       })}
@@ -314,7 +314,7 @@ await images.forEach((i)=>{
                     <input
                       type="number"
                       id="pnumber"
-                      {...register('phoneNumber', {
+                      {...register("phoneNumber", {
                         required: true,
                         pattern: /@/i,
                       })}
@@ -343,7 +343,7 @@ await images.forEach((i)=>{
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default From;

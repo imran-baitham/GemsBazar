@@ -4,7 +4,6 @@ import { BsCalendarX } from "react-icons/bs";
 import { Button } from "../../components/button/button";
 
 function MyUploads() {
-
   let userLoginProduct = true;
 
   return (

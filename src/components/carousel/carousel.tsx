@@ -38,7 +38,7 @@ export function Carousel(props: CarouselProps) {
                   return (
                     <SwiperSlide key={items}>
                       <div className="bg-gray-100 h-[440px] w-5/6 m-auto mt-1 select-none">
-                        <Image src={imgurl1} alt="products images"/>
+                        <Image src={imgurl1} alt="products images" />
                       </div>
                     </SwiperSlide>
                   );
